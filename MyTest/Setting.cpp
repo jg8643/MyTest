@@ -46,21 +46,22 @@ void Setting::ReadDataFile()
 void Setting::WriteDataFile()
 {
 	FILE *fout = fopen("data.txt", "w+");
-	for (int i = 0; i < count-1; i++) {
+	for (int i = 0; i < count; i++) {
 		CStringA charstr1(memo[i]->date);
 		CStringA charstr2(memo[i]->str);
 		fprintf(fout, "%s|%s+\n", charstr1, charstr2);
 	}
+	/*
 	CStringA charstr1(memo[count - 1]->date);
 	CStringA charstr2(memo[count - 1]->str);
 	fprintf(fout, "%s|%s+\n", charstr1, charstr2);
+	*/
 	fclose(fout);
 }
 
 void Setting::ReadMemoFile()
 {
 	char buf[1024];
-	char *temp[2];
 	int i = 0;
 	FILE *fin = fopen("memo.txt", "rt");
 
@@ -74,7 +75,6 @@ void Setting::ReadMemoFile()
 void Setting::WriteMemoFile()
 {
 	FILE *fout = fopen("memo.txt", "w+");
-
 	temp_memo.Replace(L"\r\n", L"¡Ù");
 	CStringA charstr1(temp_memo);
 	fprintf(fout, "%s", charstr1);
